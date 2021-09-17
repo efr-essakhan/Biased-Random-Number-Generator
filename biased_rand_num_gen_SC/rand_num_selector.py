@@ -17,8 +17,10 @@ class RandomNumberSelector():
             must add to 1.
         """
 
+        #Verification
+        if len(probabilities) != len(population):
+            raise ValueError("Both list probabilities & population should have the same number of elements")
 
-        #Type checking
         if all([isinstance(item, float) | isinstance(item, int) for item in population]):
             raise TypeError("List population can only contain elements of type int or float.")
 
@@ -31,12 +33,10 @@ class RandomNumberSelector():
         if round(sum(probabilities),2) == 1:
             raise ValueError("List probabilities' elements must sum up to 1.00 (to 2dp).")
 
+        self._population = population
 
-        # if len(probabilities) != len(population)
+        self._probabilities = probabilities
 
-        self.population = population
-
-        self.probabilities = probabilities
 
 
     def next_num(self):
@@ -44,15 +44,15 @@ class RandomNumberSelector():
 
         #in an elimnation manner, the more indexes that get eliminated in the list, the larger the share of the next index in the list of being larger then RAND as its chance of occuring now is an accumulation of the probabilities of the previous indexes, in this manner i can maintain propotionality.
 
-        rand_n = random.random()
+        rand_n = random.random() #Whichever number's chance is greater then this, gets returned.
 
         tot_chance_of_this_index = 0
 
-        for index, prob in enumerate(self.probabilities):
+        for index, prob in enumerate(self._probabilities):
             tot_chance_of_this_index+=prob
 
-            if rand_n <= tot_chance_of_this_index:
-                return self.population[index]
+            if  tot_chance_of_this_index >= rand_n:
+                return self._population[index]
 
 
     def next_num_tracker(self, k: int):
@@ -68,7 +68,11 @@ class RandomNumberSelector():
             k (int): Amount of times next_num should be called.
         """
 
-        population_selection_dict = dict.fromkeys(self.population, 0) #convert list into dict, with default val 0
+        #verify
+        if isinstance(k, int):
+            raise TypeError("k should be of type int")
+
+        population_selection_dict = dict.fromkeys(self._population, 0) #convert list into dict, with default vals 0
 
         for i in range(k):
 
@@ -86,7 +90,7 @@ class RandomNumberSelector():
 if __name__ == "__main__":
 
 
-    randomGen = BiasedRandomGen()
+    randomGen = RandomNumberSelector([-1, 0, 1, 2, 3],  [0.01, 0.3, 0.58, 0.1, 0.01])
 
     randomGen.next_num_tracker(10000)
 
