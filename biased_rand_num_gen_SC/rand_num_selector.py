@@ -9,12 +9,12 @@ class RandomNumberSelector():
         """[summary]
 
         Args:
-            population (list): List of possible numbers from which you want to pick one.
+            population (list): List of possible numbers (int) from which you want to pick one.
             probabilities (list):
-            A list that defines the probabilities for each element being selected.
+            A list that defines the probabilities (of type float) for each element being selected.
             The indexes of both population and probabilities correspond to each other.
             This list must be the same length as the population and total of all probabilities
-            must add to 1.
+            must add to 1. All numbers in this list must be => 0 and <= 1
         """
 
         #Verification
@@ -40,7 +40,11 @@ class RandomNumberSelector():
 
 
     def next_num(self):
+        """[summary]
 
+        Returns:
+            int or float: Selected number from population.
+        """
 
         #in an elimnation manner, the more indexes that get eliminated in the list, the larger the share of the next index in the list of being larger then RAND as its chance of occuring now is an accumulation of the probabilities of the previous indexes, in this manner i can maintain propotionality.
 
@@ -66,6 +70,9 @@ class RandomNumberSelector():
 
         Args:
             k (int): Amount of times next_num should be called. k should be > 1.
+
+        Returns:
+            List:
         """
 
         #verify k
@@ -93,14 +100,5 @@ class RandomNumberSelector():
         return list_selections
 
 
-
-
-
-if __name__ == "__main__":
-
-
-    randomGen = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
-
-    randomGen.next_num_tracker(10000)
 
 

@@ -28,22 +28,42 @@ class TestRandomNumberSelector(unittest.TestCase):
         exception_exp4 = ValueError
         exception_exp5 = ValueError
 
-        #TODO: also verify message
         # Testing
-        with self.assertRaises(exception_exp1):
+        with self.assertRaises(exception_exp1) as error:
             rand_selector1 = RandomNumberSelector([0,1,2,5], [0.33,0.33,0.34]) #Lists not equal length
 
-        with self.assertRaises(exception_exp2):
+        self.assertEqual( #Testing thrown message
+            "Both list probabilities & population should have the same number of elements",
+            str(error.exception)
+        )
+
+        with self.assertRaises(exception_exp2) as error:
             rand_selector2 = RandomNumberSelector([0,'', 2.0], [0.4,0.3,0.1]) #Population list not consisting of int or float
+        self.assertEqual( #Testing thrown message
+            "List population can only contain elements of type int or float.",
+            str(error.exception)
+        )
 
-        with self.assertRaises(exception_exp3):
+        with self.assertRaises(exception_exp3) as error:
             rand_selector3 = RandomNumberSelector([0,1,2],  [1,0.3,0.1]) # List probabilities containing other than float
+        self.assertEqual( #Testing thrown message
+            "List probabilities can only contain elements of type float.",
+            str(error.exception)
+        )
 
-        with self.assertRaises(exception_exp4):
+        with self.assertRaises(exception_exp4) as error:
             rand_selector4 = RandomNumberSelector([0,1,2],  [-0.1,0.3,0.1]) #Probabilities being 0<=x<1
+        self.assertEqual( #Testing thrown message
+            "List probabilities can only contain elements X that are: 0 <= X < 1.",
+            str(error.exception)
+        )
 
-        with self.assertRaises(exception_exp5):
+        with self.assertRaises(exception_exp5) as error:
             rand_selector5 = RandomNumberSelector([0,1,2],  [0.1,0.3,0.1]) #Probabilities not adding to 1
+        self.assertEqual( #Testing thrown message
+            "List probabilities' elements must sum up to 1.00 (to 2dp).",
+            str(error.exception)
+        )
 
     def test_next_num_change_of_num(self):
         """Tests next_num actually does select a different number eventually"""
@@ -77,23 +97,27 @@ class TestRandomNumberSelector(unittest.TestCase):
         #Setup
         rand_selector = RandomNumberSelector([0,1,2], [0.33,0.33,0.34])
 
-        #TODO: also verify message
         # Testing
-        with self.assertRaises(exception_exp1):
+        with self.assertRaises(exception_exp1) as error:
             rand_selector.next_num_tracker(k='lll') #k not an int
+        self.assertEqual( #Testing thrown message
+            "k should be of type int",
+            str(error.exception)
+        )
 
-        with self.assertRaises(exception_exp2):
+        with self.assertRaises(exception_exp2) as error:
             rand_selector.next_num_tracker(k=-1) #k<1
-
-
-
+        self.assertEqual( #Testing thrown message
+            "k should be atleast >= 1",
+            str(error.exception)
+        )
 
     def test_next_num_tracker_probability_weights(self):
         """Tests if next_num_tracker select different numbers whilst taking probability bias in account.
         """
 
         #Exprected result
-        estimates = [1000,2000,3000,4000] #I expect the selections by next_num (list_tot_selections) to not be +/-10% these estimates
+        estimates = [1000,2000,3000,4000] #expect the selections by next_num (list_tot_selections) to not be +/-10% outside these estimates
 
         #Setup
         rand_selector = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
@@ -119,10 +143,6 @@ class TestRandomNumberSelector(unittest.TestCase):
 
 
         pass
-
-
-
-
 
 if __name__ == "__main__":
     unittest.main() #Calls Setup> all tests > tear-down
