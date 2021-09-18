@@ -6,7 +6,8 @@ from rand_num_selector import RandomNumberSelector
 
 
 class TestRandomNumberSelector(unittest.TestCase):
-    """Testing RandomNumberSelector class in rand_num_selector.py
+    """
+    Testing RandomNumberSelector class in rand_num_selector.py
     """
     def test_init_input_verification(self):
         """Testing all input verification methods in __input__(), checks
@@ -79,7 +80,8 @@ class TestRandomNumberSelector(unittest.TestCase):
         self.assertTrue(number_changed)
 
     def test_next_num_tracker_k_verification(self):
-        """Testing k parameter verification in next_num_tracker(), checks
+        """
+        Testing k parameter verification in next_num_tracker(), checks
         if all exceptions are called correctly.
         """
         #Expected result
@@ -105,7 +107,8 @@ class TestRandomNumberSelector(unittest.TestCase):
         )
 
     def test_next_num_tracker_probability_weights(self):
-        """Tests if next_num_tracker select different numbers whilst taking probability bias in account.
+        """
+        Tests if next_num_tracker select different numbers whilst taking probability bias in account.
         """
 
         #Exprected result

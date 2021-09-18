@@ -8,7 +8,7 @@ class RandomNumberSelector():
     """
 
     def __init__(self, population : list, probabilities : list):
-        """[summary]
+        """
 
         Args:
             population (list): List of possible numbers (int) from which you want to pick one.
@@ -42,7 +42,8 @@ class RandomNumberSelector():
 
 
     def next_num(self):
-        """Selects a number from a population (list) based on the probabilities (list) provided.
+        """
+        Selects a number from a population (list) based on the probabilities (list) provided.
 
         Returns:
             int or float: Selected number from population.
