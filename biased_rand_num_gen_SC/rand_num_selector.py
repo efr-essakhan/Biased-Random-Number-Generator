@@ -1,3 +1,5 @@
+"""Contains RandomNumberSelector class"""
+
 import random
 
 
@@ -40,7 +42,7 @@ class RandomNumberSelector():
 
 
     def next_num(self):
-        """[summary]
+        """Selects a number from a population (list) based on the probabilities (list) provided.
 
         Returns:
             int or float: Selected number from population.
@@ -63,7 +65,7 @@ class RandomNumberSelector():
         """
         Generates a number from the population
         using next_num 'k' number of times and in the end
-        prints out how many times each number was selected.
+        prints out to console how many times each number was selected.
 
         When this method is called multiple times
         over a long period, it should return the numbers roughly with the initialized probabilities.
@@ -72,7 +74,7 @@ class RandomNumberSelector():
             k (int): Amount of times next_num should be called. k should be > 1.
 
         Returns:
-            List:
+            List: List of the amount of times the population's number were selected.
         """
 
         #verify k

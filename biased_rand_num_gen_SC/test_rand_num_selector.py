@@ -1,3 +1,5 @@
+"""Unit test for RandomNumberSelector class"""
+
 import unittest
 
 from rand_num_selector import RandomNumberSelector
@@ -6,16 +8,6 @@ from rand_num_selector import RandomNumberSelector
 class TestRandomNumberSelector(unittest.TestCase):
     """Testing RandomNumberSelector class in rand_num_selector.py
     """
-
-    def setUp(self):
-        """Method used to initilize our test (ran each time)
-        """
-        pass
-
-    def tearDown(self):
-        """Ran each time after the unit tests have been done."""
-        pass
-
     def test_init_input_verification(self):
         """Testing all input verification methods in __input__(), checks
         if all exceptions are called correctly.
