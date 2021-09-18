@@ -21,16 +21,16 @@ class RandomNumberSelector():
         if len(probabilities) != len(population):
             raise ValueError("Both list probabilities & population should have the same number of elements")
 
-        if all([isinstance(item, float) | isinstance(item, int) for item in population]):
+        if all([isinstance(item, float) | isinstance(item, int) for item in population]) == False:
             raise TypeError("List population can only contain elements of type int or float.")
 
-        if all([isinstance(item, float) for item in probabilities]):
+        if all([isinstance(item, float) for item in probabilities]) == False:
             raise TypeError("List probabilities can only contain elements of type float.")
 
-        if all([(item < 1 & item >= 0) for item in probabilities]):
-            raise ValueError("List probabilities can only contain elements X that are: 0 >= X < 1.")
+        if all([(item < 1 and item >= 0) for item in probabilities]) == False:
+            raise ValueError("List probabilities can only contain elements X that are: 0 <= X < 1.")
 
-        if round(sum(probabilities),2) == 1:
+        if round(sum(probabilities),2) != 1:
             raise ValueError("List probabilities' elements must sum up to 1.00 (to 2dp).")
 
         self._population = population
