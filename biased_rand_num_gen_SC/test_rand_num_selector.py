@@ -4,7 +4,6 @@ import unittest
 
 from rand_num_selector import RandomNumberSelector
 
-
 class TestRandomNumberSelector(unittest.TestCase):
     """
     Testing RandomNumberSelector class in rand_num_selector.py
@@ -13,7 +12,6 @@ class TestRandomNumberSelector(unittest.TestCase):
         """Testing all input verification methods in __input__(), checks
         if all exceptions are called correctly.
         """
-
         #Exprected result
         exception_exp1 = ValueError
         exception_exp2 = TypeError
@@ -118,7 +116,6 @@ class TestRandomNumberSelector(unittest.TestCase):
         rand_selector = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
         test_fail = True
 
-
         #Test execution
         tot_selections = rand_selector.next_num_tracker(10000)
         for estimate in [1000,2000,3000,4000]:
@@ -133,11 +130,7 @@ class TestRandomNumberSelector(unittest.TestCase):
                     #Since the difference is > 10%, the selection rate is not right by next_num()
                     test_fail = True
 
-
         self.assertTrue(test_fail)
-
-
-        pass
 
 if __name__ == "__main__":
     unittest.main() #Calls Setup> all tests > tear-down

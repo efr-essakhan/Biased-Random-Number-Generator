@@ -2,14 +2,12 @@
 
 import random
 
-
 class RandomNumberSelector():
     """Class for creating an instance which facilitates methods for selecting a number from a list based on provided probability weights.
     """
 
     def __init__(self, population : list, probabilities : list):
         """
-
         Args:
             population (list): List of possible numbers (int) from which you want to pick one.
             probabilities (list):
