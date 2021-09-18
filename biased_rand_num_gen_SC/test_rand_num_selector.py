@@ -28,10 +28,10 @@ class TestRandomNumberSelector(unittest.TestCase):
         exception_exp4 = ValueError
         exception_exp5 = ValueError
 
-        #TODO: try with message
+        #TODO: also verify message
         # Testing
         with self.assertRaises(exception_exp1):
-            rand_selector1 = RandomNumberSelector([0,1,2,5], [0.4,0.3,0.1]) #Lists not equal length
+            rand_selector1 = RandomNumberSelector([0,1,2,5], [0.33,0.33,0.34]) #Lists not equal length
 
         with self.assertRaises(exception_exp2):
             rand_selector2 = RandomNumberSelector([0,'', 2.0], [0.4,0.3,0.1]) #Population list not consisting of int or float
@@ -65,6 +65,33 @@ class TestRandomNumberSelector(unittest.TestCase):
 
         # Test
         self.assertTrue(number_changed)
+
+    def test_next_num_tracker_k_verification(self):
+        """Testing k parameter verification in next_num_tracker(), checks
+        if all exceptions are called correctly.
+        """
+        #Exprected result
+        exception_exp1 = TypeError
+        exception_exp2 = ValueError
+
+        #Setup
+        rand_selector = RandomNumberSelector([0,1,2], [0.33,0.33,0.34])
+
+        #TODO: also verify message
+        # Testing
+        with self.assertRaises(exception_exp1):
+            rand_selector.next_num_tracker(k='lll') #k not an int
+
+        with self.assertRaises(exception_exp2):
+            rand_selector.next_num_tracker(k=-1) #k<1
+
+
+
+
+    def test_next_num_tracker_probability_weights(self):
+        """Tests if next_num_tracker does select different numbers as per probabilities"""
+        pass
+
 
 
 

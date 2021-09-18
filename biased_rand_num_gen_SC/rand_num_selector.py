@@ -65,12 +65,14 @@ class RandomNumberSelector():
         over a long period, it should return the numbers roughly with the initialized probabilities.
 
         Args:
-            k (int): Amount of times next_num should be called.
+            k (int): Amount of times next_num should be called. k should be > 1.
         """
 
         #verify
-        if isinstance(k, int):
+        if isinstance(k, int) == False:
             raise TypeError("k should be of type int")
+        if k < 1 == True:
+            raise ValueError("k should be atleast >= 1")
 
         population_selection_dict = dict.fromkeys(self._population, 0) #convert list into dict, with default vals 0
 
