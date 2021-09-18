@@ -70,7 +70,7 @@ class TestRandomNumberSelector(unittest.TestCase):
         """Testing k parameter verification in next_num_tracker(), checks
         if all exceptions are called correctly.
         """
-        #Exprected result
+        #Expected result
         exception_exp1 = TypeError
         exception_exp2 = ValueError
 
@@ -89,7 +89,35 @@ class TestRandomNumberSelector(unittest.TestCase):
 
 
     def test_next_num_tracker_probability_weights(self):
-        """Tests if next_num_tracker does select different numbers as per probabilities"""
+        """Tests if next_num_tracker select different numbers whilst taking probability bias in account.
+        """
+
+        #Exprected result
+        estimates = [1000,2000,3000,4000] #I expect the selections by next_num (list_tot_selections) to not be +/-10% these estimates
+
+        #Setup
+        rand_selector = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
+        test_fail = True
+
+
+        #Test execution
+        tot_selections = rand_selector.next_num_tracker(10000)
+        for estimate in [1000,2000,3000,4000]:
+
+            for tot_selection in tot_selections:
+
+                diff = abs(tot_selection-estimate) # abs -> always positive
+
+                perc_diff = diff/estimate
+
+                if 0 <= perc_diff <= 0.10 == False:
+                    #Since the difference is > 10%, the selection rate is not right by next_num()
+                    test_fail = True
+
+
+        self.assertTrue(test_fail)
+
+
         pass
 
 

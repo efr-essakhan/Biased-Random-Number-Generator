@@ -68,7 +68,7 @@ class RandomNumberSelector():
             k (int): Amount of times next_num should be called. k should be > 1.
         """
 
-        #verify
+        #verify k
         if isinstance(k, int) == False:
             raise TypeError("k should be of type int")
         if k < 1 == True:
@@ -82,8 +82,15 @@ class RandomNumberSelector():
 
             population_selection_dict[num] += 1
 
+        list_selections = [] #used to return the generated numbers
+
         for key, value in population_selection_dict.items():
+
+            list_selections.append(value)
+
             print(f'{key}: {value} times')
+
+        return list_selections
 
 
 
@@ -92,7 +99,7 @@ class RandomNumberSelector():
 if __name__ == "__main__":
 
 
-    randomGen = RandomNumberSelector([-1, 0, 1, 2, 3],  [0.01, 0.3, 0.58, 0.1, 0.01])
+    randomGen = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
 
     randomGen.next_num_tracker(10000)
 
