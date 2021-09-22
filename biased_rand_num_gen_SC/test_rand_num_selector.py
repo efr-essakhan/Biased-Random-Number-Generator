@@ -122,9 +122,9 @@ class TestRandomNumberSelector(unittest.TestCase):
         for tot_selection, estimate in zip(tot_selections, estimates):
             diff = abs(tot_selection-estimate) # abs -> always positive
 
-            perc_diff = estimate/diff
+            perc_diff = (diff*100)/estimate
 
-            if 0 <= perc_diff <= 0.10 == False:
+            if (0 <= perc_diff <= 10) == False:
                 #Since the difference is > 10%, the selection rate is not right by next_num()
                 test_pass = False
 
