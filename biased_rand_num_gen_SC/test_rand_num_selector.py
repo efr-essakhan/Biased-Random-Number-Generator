@@ -114,23 +114,21 @@ class TestRandomNumberSelector(unittest.TestCase):
 
         #Setup
         rand_selector = RandomNumberSelector([1,2,3,4], [0.1, 0.2, 0.3, 0.4])
-        test_fail = True
+        test_pass = True
 
         #Test execution
         tot_selections = rand_selector.next_num_tracker(10000)
-        for estimate in [1000,2000,3000,4000]:
+        
+        for tot_selection, estimate in zip(tot_selections, estimates):
+            diff = abs(tot_selection-estimate) # abs -> always positive
 
-            for tot_selection in tot_selections:
+            perc_diff = estimate/diff
 
-                diff = abs(tot_selection-estimate) # abs -> always positive
+            if 0 <= perc_diff <= 0.10 == False:
+                #Since the difference is > 10%, the selection rate is not right by next_num()
+                test_pass = False
 
-                perc_diff = diff/estimate
-
-                if 0 <= perc_diff <= 0.10 == False:
-                    #Since the difference is > 10%, the selection rate is not right by next_num()
-                    test_fail = True
-
-        self.assertTrue(test_fail)
+        self.assertTrue(test_pass)
 
 if __name__ == "__main__":
     unittest.main() #Calls Setup> all tests > tear-down
